@@ -1,0 +1,18 @@
+body{
+    width:400px;
+}
+h2{
+    margin:15px; 
+    text-align: center;
+}
+h4{
+    margin: 30px;
+}
+li{
+    margin-inline-start: 10px;
+    margin-inline-end: 10px;
+}
+#word{
+    float: left;
+    margin-right:10px; 
+}

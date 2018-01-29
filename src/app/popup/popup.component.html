@@ -1,4 +1,26 @@
-<p>
-  Welcome to Popup component!
-</p>
+<head>
+    <title>List Manager</title>
+</head>
+<body>
+    
+    <h2>List Manager</h2>
+    <h4>Total Words in list:</h4>
+    
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor = "let word of total">
+            <span id= "word" class="badge badge-light">{{word.name}}</span>
+            <span>{{word.url}}</span>
+           
+            <button id="removebutton" class="btn btn-danger btn-xs"(click)="onRemove(word)">Remove</button>
+        </li>
+        
+    </ul>
+
+    <input [(ngModel)]="AddIt" (keyUp.enter)="onKeyUp()" />
+    <button id="sBs" class="btn btn-primary btn-block" (click)="onSearch()">Batching!</button> 
+    <button id="clearbutton" class="btn btn-primary btn-block" (click)= "clearList()">Clear List</button>    
+
+    
+
+</body>
 
