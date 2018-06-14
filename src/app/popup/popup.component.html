@@ -2,23 +2,44 @@
     <title>List Manager</title>
 </head>
 <body>
+    <h3 id="batch">Batch searching Ex</h3>
+    <h2 class="display-6">List Manager</h2>
+    <input id="add" type="text" class="form-control" placeholder="add word to list" [(ngModel)]="AddIt" (keyUp.enter)="onKeyUp()" />
+    <h4 class="display-6">Total Words in list:</h4>
     
-    <h2>List Manager</h2>
-    <h4>Total Words in list:</h4>
-    
-    <ul class="list-group">
+    <ul id="list" class="list-group">
         <li class="list-group-item" *ngFor = "let word of total">
-            <span id= "word" class="badge badge-light">{{word.name}}</span>
-            <span>{{word.url}}</span>
+            <h6 class="display-6" id= "word">{{word.name}}</h6>
            
-            <button id="removebutton" class="btn btn-danger btn-xs"(click)="onRemove(word)">Remove</button>
+            <span *ngIf= "isMovieProp==true">{{word.rating}} {{word.genre}} {{word.time}}</span>
+           
+            <button id="removebutton" class="btn btn-danger btn-sm"(click)="onRemove(word)">Remove</button>
         </li>
         
     </ul>
 
-    <input [(ngModel)]="AddIt" (keyUp.enter)="onKeyUp()" />
-    <button id="sBs" class="btn btn-primary btn-block" (click)="onSearch()">Batching!</button> 
-    <button id="clearbutton" class="btn btn-primary btn-block" (click)= "clearList()">Clear List</button>    
+    
+    <div class="btn-group" id="imdb" *ngIf= "isMovie==true">
+        <button  type="button" class="btn btn-warning" (click)="onOTW()">Imdb Opening This Week</button>
+        <button  type="button" class="btn btn-warning" (click)="onNP()">Imdb Now Playing</button>
+        <button  type="button" class="btn btn-warning" (click)="onCS()">Imdb Coming Soon</button>
+        <button  type="button" class="btn btn-warning" (click)="onMovieProp()">Movie Accurate search</button>
+    </div>
+    <div class="btn-group" id="steam" *ngIf= "isGame==true">
+        <button  class="btn btn-primary" (click)="onNaT()">Steam New And Trending</button>
+        <button  class="btn btn-primary"(click)="onTOPS()">Steam Top Sellers</button>
+        <button  class="btn btn-primary" (click)="onUPC()">Steam Upcoming</button>
+        <button  class="btn btn-primary" (click)="onSP()">Steam Specials</button>  
+    </div>
+
+    <div class="btn-group" id="sound" *ngIf= "isSong==true">
+        <button  class="btn" (click)="onST10()">SoundCloud Top 10</button>
+        <button  class="btn" (click)="onST20()">SoundCloud Top 20</button>
+    </div>
+   <div class="btn-group" id="main">
+    <button id="mainBS" class="btn btn-success" (click)="onSearch()">Batching!</button> 
+    <button id="mainBC" class="btn btn-danger " (click)= "clearList()">Clear List</button> 
+    </div>   
 
     
 

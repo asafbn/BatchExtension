@@ -11,16 +11,17 @@ import { PopupComponent } from './../popup/popup.component';
 export class EventPageComponent implements OnInit {
   Data: any;
   constructor(private EventPageService:EventPageService) {
-    this.EventPageService.CreatePrimaryCtx();
+  this.EventPageService.CreatePrimaryCtx();
     this.EventPageService.SearchWord();
     this.EventPageService.AddWord();
+    //this.EventPageService.AddImdbLIst();
     
     
     
    }
    
   ngOnInit() {
-    
+  
   }
 
 }

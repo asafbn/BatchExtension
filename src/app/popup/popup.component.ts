@@ -16,25 +16,29 @@ import { Http } from '@angular/http';
 })
 export class PopupComponent implements OnInit {
     Data: any;
-    AddIt= "add word to list"
+    AddIt;
     total:any;
-    isMovie=false;
+    isMovie;
+    isGame;
+    isSong;
+    isMovieProp=false;
     
     
    
     
     constructor(
         private PopupService: PopupService,
-        private ImdbService: ImdbService,
+      
         )
         {
+            
             this.initList();
             this.checkStatus();
            
               
         }
      ngOnInit() {
-        
+       
     }
     
     initList(){
@@ -46,11 +50,11 @@ export class PopupComponent implements OnInit {
     
     checkStatus(){
         this.PopupService.sendContentScriptCommand().then( () => {
-            
             this.Data=this.PopupService.responseData;
-            this.ImdbService.movieRating(this.Data);
             this.total=this.PopupService.List;
-            
+            this.isMovie=this.PopupService.isMovie;
+            this.isGame=this.PopupService.isGame;
+            this.isSong=this.PopupService.isSong;
             
             
         });
@@ -73,10 +77,9 @@ export class PopupComponent implements OnInit {
     }
     onKeyUp(){
        this.PopupService.addToList(this.AddIt).then(()=>{
-        this.PopupService.sendContentScriptCommand().then( () => {
-       this.total=this.PopupService.List;
+        this.total=this.PopupService.List;
         chrome.storage.sync.set({'total':this.total,'isCleard':false});
-        });
+        this.PopupService.sendContentScriptCommand();
         
        });
        
@@ -90,18 +93,116 @@ export class PopupComponent implements OnInit {
                 searchLi=this.total[i].name;
                 continue;
             }
-            searchLi += " " + this.total[i].name;
+            searchLi += "%0A" + this.total[i].name;
             
         }
         
         if(searchLi!=null){
             chrome.tabs.create({  
-                url: "http://www.google.com/search?q=" + searchLi});
+                url: "https://batchsearching.firebaseapp.com/search?q=" + searchLi});
         }
       
         
     }
-    
+    onOTW(){
+        this.PopupService.ImdbOTW().then(()=>{
+            for(let i=0;i<this.PopupService.openinigThisWeek.length;i++)
+            {
+                this.total.push({name:this.PopupService.openinigThisWeek[i]});
+                this.checkStatus();
+                console.log(this.PopupService.openinigThisWeek[i]);
+            }
+            
+            
+            this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+        })
+        this.PopupService.openinigThisWeek=[];
+    }
+    onNP(){
+        this.PopupService.ImdbNP().then(()=>{
+            for(let i=0;i<this.PopupService.nowPlaying.length;i++)
+            {
+                this.total.push({name:this.PopupService.nowPlaying[i]});
+                this.checkStatus();
+                console.log(this.PopupService.nowPlaying[i]);
+            }
+            this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+        })
+        this.PopupService.nowPlaying=[];
+    }
+    onCS(){
+        this.PopupService.ImdbCS().then(()=>{
+            for(let i=0;i<this.PopupService.comingSoon.length;i++)
+            {
+                this.total.push({name:this.PopupService.comingSoon[i]});
+                this.checkStatus();
+                console.log(this.PopupService.comingSoon[i]);
+            }
+            this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+        })
+        this.PopupService.comingSoon=[];
+    }
+    onNaT(){
+        this.PopupService.steamNAT();
+        this.PopupService.steamNaT.forEach(item=>{
+            this.total.push({name:item});
+        })
+        this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+    }
+    onTOPS(){
+        this.PopupService.steamTOPS();
+        this.PopupService.steamTS.forEach(item=>{
+            this.total.push({name:item});
+        })
+        this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+    }
+    onUPC(){
+        this.PopupService.steamUPC();
+        this.PopupService.steamUP.forEach(item=>{
+            this.total.push({name:item});
+        })
+        this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+    }
+    onSP(){
+        this.PopupService.steamSP();
+        this.PopupService.steamSpecial.forEach(item=>{
+            this.total.push({name:item});
+        })
+        this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+    }
+    onST10(){
+        this.PopupService.soundT10();
+        this.PopupService.soundt10.forEach(item=>{
+            this.total.push({name:item});
+        })
+        this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+    }
+    onST20(){
+        this.PopupService.soundT20();
+        this.PopupService.soundt20.forEach(item=>{
+            this.total.push({name:item});
+        })
+        this.PopupService.List=this.total;
+            chrome.storage.sync.set({'total':this.total});
+    }
+    onMovieProp(){
+        this.PopupService.movieProp().then(()=>{
+            
+            this.total=this.PopupService.List;
+            console.log(this.PopupService.List)
+            this.isMovieProp=true;
+           
+        })
+        
+    }
     
     
            

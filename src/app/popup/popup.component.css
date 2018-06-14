@@ -1,18 +1,97 @@
+@import url(https://fonts.googleapis.com/css?family=Bangers);
 body{
-    width:400px;
+    width:auto;
+    background-color: #444;
+    
 }
 h2{
-    margin:15px; 
+    margin:10%; 
     text-align: center;
+    color: #fff;
 }
 h4{
-    margin: 30px;
+    margin: 5%;
+    margin-left: 10%;
+    color: #fff;
 }
 li{
-    margin-inline-start: 10px;
-    margin-inline-end: 10px;
+    margin-inline-start: 10%;
+    margin-inline-end: 10%;
+    background-color: #5cd65c;
 }
+
 #word{
     float: left;
-    margin-right:10px; 
+    margin-right:10%; 
+    height: 5%;
 }
+button{
+    margin-bottom: 2px;
+}
+#add{
+    margin-bottom:5px;
+    width:40%;
+    position: center;
+    text-align: center;
+    margin-left: 31%;
+}
+#main{
+    padding: 5px;
+    width:40%;
+}
+#mainBS{
+    
+    margin-left:10%;
+   
+}
+#mainBC{
+    margin-right:10%;
+    
+}
+
+#imdb{
+   
+    padding: 1%;
+    margin-left:15px;
+    margin-right: 3px;
+    
+   
+}
+#steam{
+    padding: 1%;
+    margin-left:10px;
+    margin-right: 3px;
+    
+}
+#sound{
+    padding: 1%;
+    margin-left:15px;
+    margin-right: 3px;
+    color: #ff6600;
+
+}
+#list{
+    margin-bottom: 1%;
+    padding: 3%;
+}
+#removebutton{
+    height:5%;
+    float: right;
+}
+
+
+#batch {
+
+    text-align: center;
+  font-weight: normal;
+  color: #fff;
+  text-transform: uppercase;
+  font-size:3em;
+  white-space: nowrap;
+  font-size: 12vw;
+  z-index: 1000;
+  font-family: 'Bangers';
+  text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.7);
+  margin: 0 auto;
+    
+  }
